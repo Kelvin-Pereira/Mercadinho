@@ -1,23 +1,23 @@
 package com.mercado.mercadinho.service;
 
-import com.mercado.mercadinho.domain.dto.ProdutoDTO;
+import com.mercado.mercadinho.domain.entity.Produto;
+import com.mercado.mercadinho.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import static com.mercado.mercadinho.service.ProdutoRepository.getAllProdutos;
-import static com.mercado.mercadinho.service.ProdutoRepository.getById;
-
 @Service
+@RequiredArgsConstructor
 public class ProdutoService {
 
+    private final ProdutoRepository repository;
 
-    public Page<ProdutoDTO> findByAll(Pageable pageable) {
-            return getAllProdutos(pageable);
+    public Page<Produto> findByAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
-
-    public ProdutoDTO findById(Long id) {
-        return getById(id);
+    public Produto findById(Long id) {
+        return repository.findById(id).orElseThrow();
     }
 }

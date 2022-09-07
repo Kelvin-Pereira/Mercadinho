@@ -2,6 +2,7 @@ package com.mercado.mercadinho.controller;
 
 import com.mercado.mercadinho.config.thymeleaf.ThymeleafService;
 import com.mercado.mercadinho.domain.dto.ProdutoDTO;
+import com.mercado.mercadinho.domain.entity.Produto;
 import com.mercado.mercadinho.service.ProdutoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -28,12 +29,12 @@ public class ProdutoController {
     private final ThymeleafService thymeleafService;
 
     @GetMapping
-    public ResponseEntity<Page<ProdutoDTO>> findByAll(Pageable pageable) {
+    public ResponseEntity<Page<Produto>> findByAll(Pageable pageable) {
         return ResponseEntity.ok(service.findByAll(pageable));
     }
 
     @GetMapping("/{id:[0-9]*}")
-    public ResponseEntity<ProdutoDTO> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Produto> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
