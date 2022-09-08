@@ -39,18 +39,18 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProdutoDTO> save(@RequestBody @Validated ProdutoDTO produto){
+    public ResponseEntity<ProdutoDTO> save(@RequestBody @Validated ProdutoDTO produto) {
         return ResponseEntity.ok(new ProdutoDTO());
     }
 
     @PutMapping("/{id:[0-9]*}")
     public ResponseEntity<ProdutoDTO> update(@PathVariable("id") Long id,
-                                             @RequestBody @Validated ProdutoDTO produtoD){
+                                             @RequestBody @Validated ProdutoDTO produtoD) {
         return ResponseEntity.ok(new ProdutoDTO());
     }
 
     @DeleteMapping("/{id:[0-9]*}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) {
 
     }
 

@@ -7,3 +7,10 @@ Acessar a documentação da API do projeto MERCADINHO:
 > 
 > 
 > http://localhost:8080/h2 Console H2
+> 
+>
+
+conecte-se a partir do seu IDE no banco 
+> jdbc:h2:tcp://localhost:9092/mem:dbo
+
+username: sa
