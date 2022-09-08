@@ -6,7 +6,10 @@ Acessar a documentação da API do projeto MERCADINHO:
 > http://localhost:8080/swagger-ui/index.html Swagger
 > 
 > 
-> http://localhost:8080/h2 Console H2
+> http://localhost:8080/h2 Console H2  
+> 
+JDBC URL 
+> jdbc:h2:mem:dbo
 > 
 >
 
