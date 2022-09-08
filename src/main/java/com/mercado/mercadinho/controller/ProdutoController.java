@@ -56,24 +56,8 @@ public class ProdutoController {
 
     @GetMapping("relatorio")
     public void relatorio(HttpServletResponse response) {
-
-        ProdutoDTO produto = new ProdutoDTO();
-        produto.setId(1L);
-        produto.setNome("Arroz");
-        produto.setValor(12.0);
-        produto.setAtivo(Boolean.TRUE);
-        produto.setDescricao("Tio João");
-
-        ProdutoDTO produto2 = new ProdutoDTO();
-        produto2.setId(2L);
-        produto2.setNome("Feijão");
-        produto2.setValor(12.0);
-        produto2.setAtivo(Boolean.TRUE);
-        produto2.setDescricao("Tio João");
-
         Context context = new Context();
-        List<ProdutoDTO> produtos = List.of(produto, produto2);
-        context.setVariable("produtos", produtos);
+        context.setVariable("produtos", service.findByAll());
         try (OutputStream outStream = response.getOutputStream()) {
             response.setContentType("application/pdf");
             response.addHeader("Content-Disposition", "attachment; filename=produtos.pdf");

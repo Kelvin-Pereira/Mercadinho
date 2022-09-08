@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProdutoService {
@@ -15,6 +17,10 @@ public class ProdutoService {
 
     public Page<Produto> findByAll(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public List<Produto> findByAll() {
+        return repository.findAll();
     }
 
     public Produto findById(Long id) {
