@@ -17,3 +17,5 @@ conecte-se a partir do seu IDE no banco
 > jdbc:h2:tcp://localhost:9092/mem:dbo
 
 username: sa
+
+Adicionar ao VM OPTIOS --add-opens java.base/java.lang=ALL-UNNAMED por causa do Orika
