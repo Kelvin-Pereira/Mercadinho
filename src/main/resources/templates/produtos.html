@@ -15,9 +15,13 @@
 <table>
     <tr>
         <th>Nome</th>
+        <th>Valor</th>
+        <th>Ativo</th>
     </tr>
     <tr th:each="produto: ${produtos}">
         <td th:text="${produto.nome}">Nome</td>
+        <td th:text="${produto.valor}">Valor</td>
+        <td th:text="${produto.isAtivo}">Ativo</td>
     </tr>
 </table>
 </body>

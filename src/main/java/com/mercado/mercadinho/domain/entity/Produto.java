@@ -22,7 +22,7 @@ public class Produto implements Serializable {
     @Column(name = "valor", nullable = false)
     private Double valor;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "ativo", nullable = false)

@@ -6,6 +6,7 @@ import com.mercado.mercadinho.domain.entity.Produto;
 import com.mercado.mercadinho.service.ProdutoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,14 @@ import org.thymeleaf.context.Context;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Produto")
 @RequestMapping("/produto")
 public class ProdutoController {
+
+    private final MapperFacade mapper;
 
     private final ProdutoService service;
 
@@ -39,19 +41,20 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity<ProdutoDTO> save(@RequestBody @Validated ProdutoDTO produto) {
-        return ResponseEntity.ok(new ProdutoDTO());
+    public ResponseEntity<ProdutoDTO> inserir(@RequestBody @Validated ProdutoDTO produto) {
+        return ResponseEntity.ok(mapper.map(service.save(mapper.map(produto, Produto.class)), ProdutoDTO.class));
     }
 
     @PutMapping("/{id:[0-9]*}")
     public ResponseEntity<ProdutoDTO> update(@PathVariable("id") Long id,
-                                             @RequestBody @Validated ProdutoDTO produtoD) {
-        return ResponseEntity.ok(new ProdutoDTO());
+                                             @RequestBody @Validated ProdutoDTO produto) {
+        return ResponseEntity.ok(mapper.map(service.update(id, mapper.map(produto, Produto.class)), ProdutoDTO.class));
     }
 
     @DeleteMapping("/{id:[0-9]*}")
     public void delete(@PathVariable("id") Long id) {
-
+        service.delete(id);
+        ResponseEntity.noContent().build();
     }
 
     @GetMapping("relatorio")

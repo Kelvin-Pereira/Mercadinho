@@ -66,6 +66,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <dependency>
+            <groupId>dev.akkinoc.spring.boot</groupId>
+            <artifactId>orika-spring-boot-starter</artifactId>
+            <version>2.3.3</version>
+        </dependency>
     </dependencies>
 
     <build>
