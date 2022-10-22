@@ -5,16 +5,17 @@ import com.mercado.mercadinho.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.function.LongFunction;
 
 @Service
 @RequiredArgsConstructor
-public class ProdutoService {
+public class FindByIdProdutoServer implements LongFunction<Produto> {
 
     private final ProdutoRepository repository;
 
-    public List<Produto> findByAll() {
-        return repository.findAll();
+    @Override
+    public Produto apply(long id) {
+        return repository.findById(id).orElseThrow();
     }
 
 }

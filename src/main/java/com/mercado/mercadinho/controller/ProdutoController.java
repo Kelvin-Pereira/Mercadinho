@@ -3,7 +3,7 @@ package com.mercado.mercadinho.controller;
 import com.mercado.mercadinho.config.thymeleaf.ThymeleafService;
 import com.mercado.mercadinho.domain.dto.ProdutoDTO;
 import com.mercado.mercadinho.domain.entity.Produto;
-import com.mercado.mercadinho.service.ProdutoService;
+import com.mercado.mercadinho.service.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ma.glasnost.orika.MapperFacade;
@@ -25,35 +25,38 @@ import java.io.OutputStream;
 public class ProdutoController {
 
     private final MapperFacade mapper;
-
     private final ProdutoService service;
-
+    private final FindByAllProdutoService findByAllProdutoService;
+    private final FindByIdProdutoServer findByIdProdutoServer;
+    private final SalvarProdutoServer salvarProdutoServer;
+    private final DeleteProdutoService deleteProdutoService;
+    private final UpdateProdutoService updateProdutoService;
     private final ThymeleafService thymeleafService;
 
     @GetMapping
     public ResponseEntity<Page<Produto>> findByAll(Pageable pageable) {
-        return ResponseEntity.ok(service.findByAll(pageable));
+        return ResponseEntity.ok(findByAllProdutoService.apply(pageable));
     }
 
     @GetMapping("/{id:[0-9]*}")
-    public ResponseEntity<Produto> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<Produto> findById(@PathVariable("id") long id) {
+        return ResponseEntity.ok(findByIdProdutoServer.apply(id));
     }
 
     @PostMapping()
     public ResponseEntity<ProdutoDTO> inserir(@RequestBody @Validated ProdutoDTO produto) {
-        return ResponseEntity.ok(mapper.map(service.save(mapper.map(produto, Produto.class)), ProdutoDTO.class));
+        return ResponseEntity.ok(mapper.map(salvarProdutoServer.apply(mapper.map(produto, Produto.class)), ProdutoDTO.class));
     }
 
     @PutMapping("/{id:[0-9]*}")
     public ResponseEntity<ProdutoDTO> update(@PathVariable("id") Long id,
                                              @RequestBody @Validated ProdutoDTO produto) {
-        return ResponseEntity.ok(mapper.map(service.update(id, mapper.map(produto, Produto.class)), ProdutoDTO.class));
+        return ResponseEntity.ok(mapper.map(updateProdutoService.apply(id, mapper.map(produto, Produto.class)), ProdutoDTO.class));
     }
 
     @DeleteMapping("/{id:[0-9]*}")
-    public void delete(@PathVariable("id") Long id) {
-        service.delete(id);
+    public void delete(@PathVariable("id") long id) {
+        deleteProdutoService.accept(id);
         ResponseEntity.noContent().build();
     }
 

@@ -25,12 +25,12 @@ class ProdutoServiceTest {
     private ProdutoRepository repository;
 
     @InjectMocks
-    private ProdutoService service;
+    private FindByIdProdutoServer service;
 
     @Test
     void testBuscarPorId() {
         criarRetornoProdutoByIdRepository();
-        service.findById(1L);
+        service.apply(1L);
     }
 
     private void criarRetornoProdutoByIdRepository(){

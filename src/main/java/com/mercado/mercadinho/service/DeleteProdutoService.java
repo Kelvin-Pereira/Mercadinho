@@ -5,16 +5,19 @@ import com.mercado.mercadinho.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.function.LongConsumer;
 
 @Service
 @RequiredArgsConstructor
-public class ProdutoService {
+public class DeleteProdutoService implements LongConsumer {
 
     private final ProdutoRepository repository;
+    private final FindByIdProdutoServer findByIdProdutoServer;
 
-    public List<Produto> findByAll() {
-        return repository.findAll();
+    @Override
+    public void accept(long id) {
+        Produto entityProduto = findByIdProdutoServer.apply(id);
+        repository.delete(entityProduto);
     }
 
 }
